@@ -1,3 +1,8 @@
+import 'package:app_food/config/color.dart';
+import 'package:app_food/screens/home/drawer_side.dart';
+import 'package:app_food/screens/home/singal_product.dart';
+import 'package:app_food/screens/product_overview/product_overview.dart';
+import 'package:app_food/screens/search/search.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,24 +12,30 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffcbcbcb),
-      drawer: const Drawer(),
+      drawer: const DrawerSide(),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
           'Home',
           style: TextStyle(color: Colors.black, fontSize: 17),
         ),
-        actions: const [
+        actions: [
           CircleAvatar(
-            radius: 12,
-            backgroundColor: Color.fromARGB(255, 237, 195, 229),
-            child: Icon(
-              Icons.search,
-              size: 17,
-              color: Colors.black,
+            radius: 20,
+            backgroundColor: primaryColor,
+            
+            child: IconButton(
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Search()));
+              },
+              icon: const Icon(
+                Icons.search,
+                size: 17,
+                color: Colors.black,
+              ),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 5),
             child: CircleAvatar(
               radius: 12,
@@ -107,7 +118,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
@@ -122,20 +133,55 @@ class HomeScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: const [
-                  SignalProducts(),
-                  SignalProducts(),
-                  SignalProducts(),
-                  SignalProducts(),
+                children: [
+                  SignalProducts(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const ProductOverView(
+                                productName: "Hamburger",
+                                productImage:
+                                    "https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG96770.png",
+                              )));
+                    },
+                    productImage:
+                        'https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG96770.png',
+                    productName: 'Hamburger',
+                  ),
+                  SignalProducts(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const ProductOverView(
+                                productName: "Fried Chicken",
+                                productImage:
+                                    "https://pngimg.com/uploads/turkey_food/turkey_food_PNG14.png",
+                              )));
+                    },
+                    productImage:
+                        'https://pngimg.com/uploads/turkey_food/turkey_food_PNG14.png',
+                    productName: 'Fried Chicken',
+                  ),
+                  SignalProducts(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const ProductOverView(
+                                productName: "Noodle Soup",
+                                productImage:
+                                    "https://pngimg.com/uploads/noodle/noodle_PNG70.png",
+                              )));
+                    },
+                    productImage:
+                        'https://pngimg.com/uploads/noodle/noodle_PNG70.png',
+                    productName: 'Noodle Soup',
+                  ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
-                  Text('Fresh Fruits'),
+                  Text('Dink'),
                   Text(
                     'View all',
                     style: TextStyle(color: Colors.grey),
@@ -146,11 +192,20 @@ class HomeScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: const [
-                  SignalProducts(),
-                  SignalProducts(),
-                  SignalProducts(),
-                  SignalProducts(),
+                children: [
+                  SignalProducts(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const ProductOverView(
+                                productName: "Cocktail",
+                                productImage:
+                                    "https://pngroyale.com/wp-content/uploads/2022/02/Cocktail-Ice-Drink-PNG-Image-1.png",
+                              )));
+                    },
+                    productImage:
+                        'https://pngroyale.com/wp-content/uploads/2022/02/Cocktail-Ice-Drink-PNG-Image-1.png',
+                    productName: 'Cocktail',
+                  ),
                 ],
               ),
             ),
@@ -161,111 +216,25 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class SignalProducts extends StatelessWidget {
-  const SignalProducts({
+class ListContent extends StatelessWidget {
+  const ListContent({
     Key? key,
+    required this.icon,
+    required this.title,
   }) : super(key: key);
+  final IconData icon;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      height: 230,
-      width: 160,
-      decoration: BoxDecoration(
-        color: const Color(0xffd9dad9),
-        borderRadius: BorderRadius.circular(10),
+    return ListTile(
+      leading: Icon(
+        icon,
+        size: 32,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Image.network(
-                'https://pngimg.com/uploads/basil/basil_PNG4.png'),
-          ),
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Fresh Basil',
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-                const Text(
-                  '50\$/50 Gram',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 5),
-                        height: 30,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          children: const [
-                            Expanded(
-                                child: Text(
-                              '50 Gram',
-                              style: TextStyle(fontSize: 10),
-                            )),
-                            Center(
-                              child: Icon(
-                                Icons.arrow_drop_down,
-                                size: 20,
-                                color: Colors.yellow,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 30,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey,
-                            ),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Icons.remove,
-                              size: 15,
-                              color: Color(0xffd0b84c),
-                            ),
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                color: Color(0xffd0b84c),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Icon(Icons.add, size: 15, color: Color(0xffd0b84c)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ))
-        ],
+      title: Text(
+        title,
+        style: const TextStyle(color: Colors.black45),
       ),
     );
   }
