@@ -1,15 +1,33 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/providers/product_provider.dart';
 import 'package:app_food/screens/home/drawer_side.dart';
 import 'package:app_food/screens/home/singal_product.dart';
 import 'package:app_food/screens/product_overview/product_overview.dart';
 import 'package:app_food/screens/search/search.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late ProductProvider productProvider;
+  @override
+  void initState() {
+    ProductProvider productProvider = Provider.of(context, listen: false);
+    productProvider.fatchFoodsProductData();
+    productProvider.fatchDinkProductData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    productProvider = Provider.of(context);
+
     return Scaffold(
       backgroundColor: const Color(0xffcbcbcb),
       drawer: const DrawerSide(),
@@ -23,10 +41,12 @@ class HomeScreen extends StatelessWidget {
           CircleAvatar(
             radius: 20,
             backgroundColor: primaryColor,
-            
             child: IconButton(
-              onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Search()));
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Search(
+                          search: productProvider.getAllProductSearch,
+                        )));
               },
               icon: const Icon(
                 Icons.search,
@@ -121,11 +141,22 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Herbs Seasonings'),
-                  Text(
-                    'View all',
-                    style: TextStyle(color: Colors.grey),
+                children: [
+                  const Text('Food'),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Search(
+                            search: productProvider.getFoodProductDataList,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'View all',
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ),
                 ],
               ),
@@ -133,58 +164,46 @@ class HomeScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [
-                  SignalProducts(
+                children: productProvider.getFoodProductDataList
+                    .map((foodProductData) {
+                  return SignalProducts(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ProductOverView(
-                                productName: "Hamburger",
-                                productImage:
-                                    "https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG96770.png",
+                          builder: (context) => ProductOverView(
+                                
+                                productPrice: foodProductData.productPrice,
+                                productName: foodProductData.productName,
+                                productImage: foodProductData.productImage,
                               )));
                     },
-                    productImage:
-                        'https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG96770.png',
-                    productName: 'Hamburger',
-                  ),
-                  SignalProducts(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ProductOverView(
-                                productName: "Fried Chicken",
-                                productImage:
-                                    "https://pngimg.com/uploads/turkey_food/turkey_food_PNG14.png",
-                              )));
-                    },
-                    productImage:
-                        'https://pngimg.com/uploads/turkey_food/turkey_food_PNG14.png',
-                    productName: 'Fried Chicken',
-                  ),
-                  SignalProducts(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ProductOverView(
-                                productName: "Noodle Soup",
-                                productImage:
-                                    "https://pngimg.com/uploads/noodle/noodle_PNG70.png",
-                              )));
-                    },
-                    productImage:
-                        'https://pngimg.com/uploads/noodle/noodle_PNG70.png',
-                    productName: 'Noodle Soup',
-                  ),
-                ],
+                    productId: foodProductData.productId,
+                    productPrice: foodProductData.productPrice,
+                    productImage: foodProductData.productImage,
+                    productName: foodProductData.productName,
+                  );
+                }).toList(),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Dink'),
-                  Text(
-                    'View all',
-                    style: TextStyle(color: Colors.grey),
+                children: [
+                  const Text('Dink'),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Search(
+                            search: productProvider.getDinkProductDataList,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'View all',
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ),
                 ],
               ),
@@ -192,21 +211,23 @@ class HomeScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [
-                  SignalProducts(
+                children: productProvider.getDinkProductDataList
+                    .map((dinkProductData) {
+                  return SignalProducts(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ProductOverView(
-                                productName: "Cocktail",
-                                productImage:
-                                    "https://pngroyale.com/wp-content/uploads/2022/02/Cocktail-Ice-Drink-PNG-Image-1.png",
+                          builder: (context) => ProductOverView(
+                                productPrice: dinkProductData.productPrice,
+                                productName: dinkProductData.productName,
+                                productImage: dinkProductData.productImage,
                               )));
                     },
-                    productImage:
-                        'https://pngroyale.com/wp-content/uploads/2022/02/Cocktail-Ice-Drink-PNG-Image-1.png',
-                    productName: 'Cocktail',
-                  ),
-                ],
+                    productId: dinkProductData.productId,
+                    productPrice: dinkProductData.productPrice,
+                    productImage: dinkProductData.productImage,
+                    productName: dinkProductData.productName,
+                  );
+                }).toList(),
               ),
             ),
           ],

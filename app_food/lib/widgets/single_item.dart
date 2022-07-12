@@ -1,10 +1,26 @@
 import 'package:app_food/config/color.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SingleItem extends StatelessWidget {
-  SingleItem({required this.isBool, Key? key}) : super(key: key);
+  SingleItem(
+      {required this.isBool,
+      required this.productImage,
+      required this.productName,
+      required this.productPrice,
+      this.productId,
+      this.productQuantity,
+      this.onDelete,
+      Key? key})
+      : super(key: key);
 
   bool isBool = false;
+  String productImage;
+  String productName;
+  int productPrice;
+  String? productId;
+  int? productQuantity;
+  Function()? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +36,7 @@ class SingleItem extends StatelessWidget {
                   child: SizedBox(
                     height: 100,
                     child: Center(
-                      child: Image.network(
-                          'https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG96770.png'),
+                      child: Image.network(productImage),
                     ),
                   ),
                 ),
@@ -39,12 +54,12 @@ class SingleItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'productName',
+                            productName,
                             style: TextStyle(
                                 color: textColor, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '50\$',
+                            '$productPrice\$',
                             style: TextStyle(
                                 color: textColor, fontWeight: FontWeight.bold),
                           )
@@ -117,43 +132,54 @@ class SingleItem extends StatelessWidget {
                             ),
                           ),
                         )
-                      : Column(
-                          children: [
-                            const Icon(
-                              Icons.delete,
-                              size: 30,
-                              color: Colors.black54,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              height: 25,
-                              width: 70,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.add,
-                                      color: secondColor,
-                                      size: 20,
-                                    ),
-                                    Text(
-                                      'ADD',
-                                      style: TextStyle(
-                                        color: secondColor,
-                                      ),
-                                    ),
-                                  ],
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Column(
+                            children: [
+                              InkWell(
+                                onTap: onDelete,
+                                child: const Icon(
+                                  Icons.delete,
+                                  size: 30,
+                                  color: Colors.black54,
                                 ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                height: 25,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.remove,
+                                        color: secondColor,
+                                        size: 20,
+                                      ),
+                                      Text(
+                                        '1',
+                                        style: TextStyle(
+                                          color: secondColor,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.add,
+                                        color: secondColor,
+                                        size: 20,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                 ),
               ),

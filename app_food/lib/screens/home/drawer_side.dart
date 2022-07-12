@@ -76,8 +76,8 @@ class DrawerSide extends StatelessWidget {
               iconData: Icons.home_outlined,
               title: 'Home',
               onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const HomeScreen()));
               },
             ),
             listContent(
@@ -94,7 +94,7 @@ class DrawerSide extends StatelessWidget {
               title: 'My Profile',
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => MyProfile(),
+                  builder: (context) => const MyProfile(),
                 ));
               },
             ),

@@ -1,4 +1,5 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/widgets/count.dart';
 import 'package:flutter/material.dart';
 
 class SignalProducts extends StatelessWidget {
@@ -7,9 +8,13 @@ class SignalProducts extends StatelessWidget {
     required this.productImage,
     required this.productName,
     required this.onTap,
+    required this.productPrice,
+    required this.productId,
   }) : super(key: key);
+  final String productId;
   final String productImage;
   final String productName;
+  final int productPrice;
   final Function() onTap;
 
   @override
@@ -33,17 +38,11 @@ class SignalProducts extends StatelessWidget {
                   onTap: onTap,
                   child: Container(
                     height: 150,
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     width: double.infinity,
                     child: Image.network(productImage),
                   ),
                 ),
-                // Expanded(
-                //   flex: 2,
-                //   child: Image.network(
-                //       'https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG96770.png'),
-                // ),'Fresh Basil'
-
                 Expanded(
                     flex: 2,
                     child: Padding(
@@ -57,9 +56,9 @@ class SignalProducts extends StatelessWidget {
                             style: TextStyle(
                                 color: textColor, fontWeight: FontWeight.bold),
                           ),
-                          const Text(
-                            '50\$/50 Gram',
-                            style: TextStyle(color: Colors.grey),
+                          Text(
+                            '$productPrice\$/50 Gram',
+                            style: const TextStyle(color: Colors.grey),
                           ),
                           const SizedBox(
                             height: 5,
@@ -95,33 +94,11 @@ class SignalProducts extends StatelessWidget {
                               const SizedBox(
                                 width: 5,
                               ),
-                              Container(
-                                height: 25,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.grey,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Icon(
-                                      Icons.remove,
-                                      size: 15,
-                                      color: Color(0xffd0b84c),
-                                    ),
-                                    Text(
-                                      '1',
-                                      style: TextStyle(
-                                        color: Color(0xffd0b84c),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Icon(Icons.add,
-                                        size: 15, color: Color(0xffd0b84c)),
-                                  ],
-                                ),
+                              Count(
+                                productId: productId,
+                                productImage: productImage,
+                                productName: productName,
+                                productPrice: productPrice,
                               ),
                             ],
                           )

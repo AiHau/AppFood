@@ -1,8 +1,13 @@
 import 'package:app_food/auth/sign_in.dart';
 import 'package:app_food/config/color.dart';
+import 'package:app_food/providers/product_provider.dart';
+import 'package:app_food/providers/review_cart_provider.dart';
+import 'package:app_food/providers/user_provider.dart';
+import 'package:app_food/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,16 +17,35 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ProductProvider>(
+          create: (context) => ProductProvider(),
+        ),
+        ChangeNotifierProvider<UserProvider>(
+          create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider<ReviewCartProvider>(
+          create: (context) => ReviewCartProvider(),
+        )
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
           primaryColor: primaryColor,
-          scaffoldBackgroundColor: scaffoldBackgroundColor),
-      debugShowCheckedModeBanner: false,
-      home: const SignIn(),
+          scaffoldBackgroundColor: scaffoldBackgroundColor,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: StreamBuilder(
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return const HomeScreen();
+            }
+            return const SignIn();
+          },
+        ),
+      ),
     );
   }
 }

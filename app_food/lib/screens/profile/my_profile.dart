@@ -3,10 +3,10 @@ import 'package:app_food/screens/home/drawer_side.dart';
 import 'package:flutter/material.dart';
 
 class MyProfile extends StatefulWidget {
-  //UserProvider userProvider;
-  //MyProfile({this.userProvider});
+  const MyProfile({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyProfileState createState() => _MyProfileState();
 }
 
@@ -28,8 +28,6 @@ class _MyProfileState extends State<MyProfile> {
 
   @override
   Widget build(BuildContext context) {
-    //var userData = widget.userProvider.currentUserData;
-
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
