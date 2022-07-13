@@ -1,5 +1,6 @@
 import 'package:app_food/auth/sign_in.dart';
 import 'package:app_food/config/color.dart';
+import 'package:app_food/providers/wishlist_provider.dart';
 import 'package:app_food/providers/product_provider.dart';
 import 'package:app_food/providers/review_cart_provider.dart';
 import 'package:app_food/providers/user_provider.dart';
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ReviewCartProvider>(
           create: (context) => ReviewCartProvider(),
+        ),
+        ChangeNotifierProvider<WishListProvider>(
+          create: (context) => WishListProvider(),
         )
       ],
       child: MaterialApp(

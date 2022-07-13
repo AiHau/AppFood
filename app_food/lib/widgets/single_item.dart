@@ -1,27 +1,35 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/widgets/count.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class SingleItem extends StatelessWidget {
+class SingleItem extends StatefulWidget {
   SingleItem(
       {required this.isBool,
       required this.productImage,
       required this.productName,
       required this.productPrice,
-      this.productId,
+      required this.productId,
       this.productQuantity,
       this.onDelete,
+      this.wishList,
       Key? key})
       : super(key: key);
 
   bool isBool = false;
   String productImage;
   String productName;
+  bool? wishList = false;
   int productPrice;
-  String? productId;
+  String productId;
   int? productQuantity;
   Function()? onDelete;
 
+  @override
+  State<SingleItem> createState() => _SingleItemState();
+}
+
+class _SingleItemState extends State<SingleItem> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,18 +42,18 @@ class SingleItem extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
-                    height: 100,
+                    height: 90,
                     child: Center(
-                      child: Image.network(productImage),
+                      child: Image.network(widget.productImage),
                     ),
                   ),
                 ),
               ),
               Expanded(
                 child: SizedBox(
-                  height: 100,
+                  height: 90,
                   child: Column(
-                    mainAxisAlignment: isBool == false
+                    mainAxisAlignment: widget.isBool == false
                         ? MainAxisAlignment.spaceAround
                         : MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,45 +62,78 @@ class SingleItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            productName,
+                            widget.productName,
                             style: TextStyle(
-                                color: textColor, fontWeight: FontWeight.bold),
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
                           ),
                           Text(
-                            '$productPrice\$',
+                            '${widget.productPrice}\$',
                             style: TextStyle(
                                 color: textColor, fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
-                      isBool == false
-                          ? Container(
-                              margin: const EdgeInsets.only(right: 15),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 35,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Row(children: [
-                                const Expanded(
-                                  child: Text(
-                                    '50 Gram',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 14,
+                      widget.isBool == false
+                          ? GestureDetector(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) {
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          ListTile(
+                                            title: const Text('50 Gram'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          ListTile(
+                                            title: const Text('500 Gram'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          ListTile(
+                                            title: const Text('1 Kg'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 15),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                height: 35,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Row(children: [
+                                  const Expanded(
+                                    child: Text(
+                                      '50 Gram',
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Center(
-                                  child: Icon(
-                                    Icons.arrow_drop_down,
-                                    size: 20,
-                                    color: primaryColor,
-                                  ),
-                                )
-                              ]),
+                                  Center(
+                                    child: Icon(
+                                      Icons.arrow_drop_down,
+                                      size: 20,
+                                      color: primaryColor,
+                                    ),
+                                  )
+                                ]),
+                              ),
                             )
                           : const Text('50 Gram')
                     ],
@@ -102,42 +143,22 @@ class SingleItem extends StatelessWidget {
               Expanded(
                 child: Container(
                   height: 90,
-                  padding: isBool == false
+                  padding: widget.isBool == false
                       ? const EdgeInsets.symmetric(horizontal: 15, vertical: 32)
                       : const EdgeInsets.only(left: 15, right: 15),
-                  child: isBool == false
-                      ? Container(
-                          height: 25,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.add,
-                                  color: secondColor,
-                                  size: 20,
-                                ),
-                                Text(
-                                  'ADD',
-                                  style: TextStyle(
-                                    color: secondColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                  child: widget.isBool == false
+                      ? Count(
+                          productId: widget.productId,
+                          productImage: widget.productImage,
+                          productName: widget.productName,
+                          productPrice: widget.productPrice,
                         )
                       : Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Column(
                             children: [
                               InkWell(
-                                onTap: onDelete,
+                                onTap: widget.onDelete,
                                 child: const Icon(
                                   Icons.delete,
                                   size: 30,
@@ -147,37 +168,40 @@ class SingleItem extends StatelessWidget {
                               const SizedBox(
                                 height: 5,
                               ),
-                              Container(
-                                height: 25,
-                                width: 70,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Center(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.remove,
-                                        color: secondColor,
-                                        size: 20,
+                              widget.wishList == false
+                                  ? Container(
+                                      height: 25,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(30),
                                       ),
-                                      Text(
-                                        '1',
-                                        style: TextStyle(
-                                          color: secondColor,
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.remove,
+                                              color: secondColor,
+                                              size: 20,
+                                            ),
+                                            Text(
+                                              '1',
+                                              style: TextStyle(
+                                                color: secondColor,
+                                              ),
+                                            ),
+                                            Icon(
+                                              Icons.add,
+                                              color: secondColor,
+                                              size: 20,
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Icon(
-                                        Icons.add,
-                                        color: secondColor,
-                                        size: 20,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                                    )
+                                  : Container(),
                             ],
                           ),
                         ),
@@ -186,7 +210,7 @@ class SingleItem extends StatelessWidget {
             ],
           ),
         ),
-        isBool == false
+        widget.isBool == false
             ? Container()
             : const Divider(
                 height: 1,

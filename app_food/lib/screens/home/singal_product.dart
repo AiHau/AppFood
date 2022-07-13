@@ -66,28 +66,30 @@ class SignalProducts extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Row(
-                                    children: const [
-                                      Expanded(
-                                          child: Text(
-                                        '50 Gram',
-                                        style: TextStyle(fontSize: 11),
-                                      )),
-                                      Center(
-                                        child: Icon(
-                                          Icons.arrow_drop_down,
-                                          size: 20,
-                                          color: Colors.yellow,
-                                        ),
-                                      )
-                                    ],
+                                child: InkWell(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.grey),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Row(
+                                      children: const [
+                                        Expanded(
+                                            child: Text(
+                                          '50 Gram',
+                                          style: TextStyle(fontSize: 11),
+                                        )),
+                                        Center(
+                                          child: Icon(
+                                            Icons.arrow_drop_down,
+                                            size: 20,
+                                            color: Colors.yellow,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

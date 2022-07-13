@@ -1,8 +1,10 @@
 import 'package:app_food/config/color.dart';
 import 'package:app_food/providers/product_provider.dart';
+import 'package:app_food/providers/user_provider.dart';
 import 'package:app_food/screens/home/drawer_side.dart';
 import 'package:app_food/screens/home/singal_product.dart';
 import 'package:app_food/screens/product_overview/product_overview.dart';
+import 'package:app_food/screens/review_cart/review_cart.dart';
 import 'package:app_food/screens/search/search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,10 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     productProvider = Provider.of(context);
-
+    UserProvider userProvider = Provider.of(context);
+    userProvider.getUserData();
     return Scaffold(
       backgroundColor: const Color(0xffcbcbcb),
-      drawer: const DrawerSide(),
+      drawer: DrawerSide(userProvider: userProvider,),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
@@ -55,15 +58,24 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: CircleAvatar(
-              radius: 12,
-              backgroundColor: Color.fromARGB(255, 237, 195, 229),
-              child: Icon(
-                Icons.shopping_bag_outlined,
-                size: 17,
-                color: Colors.black,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ReviewCart(),
+                  ),
+                );
+              },
+              child: CircleAvatar(
+                radius: 12,
+                backgroundColor: const Color.fromARGB(255, 237, 195, 229),
+                child: Icon(
+                  Icons.shopping_bag_outlined,
+                  size: 17,
+                  color: textColor,
+                ),
               ),
             ),
           )
@@ -170,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ProductOverView(
-                                
+                                productId: foodProductData.productId,
                                 productPrice: foodProductData.productPrice,
                                 productName: foodProductData.productName,
                                 productImage: foodProductData.productImage,
@@ -217,6 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ProductOverView(
+                                productId: dinkProductData.productId,
                                 productPrice: dinkProductData.productPrice,
                                 productName: dinkProductData.productName,
                                 productImage: dinkProductData.productImage,

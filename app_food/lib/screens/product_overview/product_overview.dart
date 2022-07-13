@@ -1,20 +1,26 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/providers/wishlist_provider.dart';
+import 'package:app_food/screens/review_cart/review_cart.dart';
+import 'package:app_food/widgets/count.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum SinginCharacter { fill, outline }
 
 class ProductOverView extends StatefulWidget {
-  final String? productName;
-  final String? productImage;
-  final int? productPrice;
-  //final String? productId;
+  final String productName;
+  final String productImage;
+  final int productPrice;
+  final String productId;
 
   const ProductOverView({
     Key? key,
-    this.productName,
-    this.productImage,
-    this.productPrice,
-    //this.productId,
+    required this.productName,
+    required this.productImage,
+    required this.productPrice,
+    required this.productId,
   }) : super(key: key);
 
   @override
@@ -29,11 +35,11 @@ class _ProductOverViewState extends State<ProductOverView> {
     required Color color,
     required String title,
     required IconData iconData,
-    //required Function() onTap,
+    required Function() onTap,
   }) {
     return Expanded(
       child: GestureDetector(
-        //onTap: onTap,
+        onTap: onTap,
         child: Container(
           padding: const EdgeInsets.all(20),
           color: backgroundColor,
@@ -59,24 +65,73 @@ class _ProductOverViewState extends State<ProductOverView> {
     );
   }
 
+  bool wishListBool = false;
+  getWishtListBool() {
+    FirebaseFirestore.instance
+        .collection("WishList")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection("YourWishList")
+        .doc(widget.productId)
+        .get()
+        .then((value) => {
+              if (mounted)
+                {
+                  if (value.exists)
+                    {
+                      setState(
+                        () {
+                          wishListBool = value.get("wishList");
+                        },
+                      ),
+                    }
+                }
+            });
+  }
+
   @override
   Widget build(BuildContext context) {
+    WishListProvider wishListProvider = Provider.of(context);
+    getWishtListBool();
     return Scaffold(
       bottomNavigationBar: Row(
         children: [
           bonntonNavigatorBar(
-            backgroundColor: textColor,
-            color: Colors.white70,
-            iconColor: Colors.grey,
-            title: "Add To WishList",
-            iconData: Icons.favorite_outline,
-          ),
+              backgroundColor: textColor,
+              color: Colors.white70,
+              iconColor: Colors.grey,
+              title: "Add To WishList",
+              iconData: wishListBool == false
+                  ? Icons.favorite_outline
+                  : Icons.favorite,
+              onTap: () {
+                setState(() {
+                  wishListBool = !wishListBool;
+                });
+                if (wishListBool == true) {
+                  wishListProvider.addWishListData(
+                    wishListId: widget.productId,
+                    wishListImage: widget.productImage,
+                    wishListName: widget.productName,
+                    wishListPrice: widget.productPrice,
+                    wishListQuantity: 2,
+                  );
+                } else {
+                  wishListProvider.deleteWishtList(widget.productId);
+                }
+              }),
           bonntonNavigatorBar(
             backgroundColor: primaryColor,
             color: textColor,
             iconColor: Colors.white70,
             title: "Go To Cart",
-            iconData: Icons.shop_outlined,
+            iconData: Icons.shopping_bag_outlined,
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ReviewCart(),
+                  ),
+                );
+            },
           ),
         ],
       ),
@@ -95,13 +150,13 @@ class _ProductOverViewState extends State<ProductOverView> {
             child: Column(
               children: [
                 ListTile(
-                  title: Text(widget.productName!),
+                  title: Text(widget.productName),
                   subtitle: const Text("\$50"),
                 ),
                 Container(
                   height: 250,
                   padding: const EdgeInsets.all(40),
-                  child: Image.network(widget.productImage!),
+                  child: Image.network(widget.productImage),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -140,33 +195,11 @@ class _ProductOverViewState extends State<ProductOverView> {
                         ],
                       ),
                       Text("\$${widget.productPrice}"),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 30,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            30,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Icons.add,
-                              size: 15,
-                              color: Color(0xffd0b84c),
-                            ),
-                            Text(
-                              "ADD",
-                              style: TextStyle(color: Color(0xffd0b84c)),
-                            )
-                          ],
-                        ),
+                      Count(
+                        productId: widget.productId,
+                        productImage: widget.productImage,
+                        productName: widget.productName,
+                        productPrice: widget.productPrice,
                       ),
                     ],
                   ),

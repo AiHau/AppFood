@@ -1,12 +1,21 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/providers/user_provider.dart';
 import 'package:app_food/screens/home/home_screen.dart';
 import 'package:app_food/screens/profile/my_profile.dart';
 import 'package:app_food/screens/review_cart/review_cart.dart';
+import 'package:app_food/screens/wishList/wish_list.dart';
 import 'package:flutter/material.dart';
 
-class DrawerSide extends StatelessWidget {
-  const DrawerSide({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class DrawerSide extends StatefulWidget {
+  UserProvider userProvider;
+  DrawerSide({Key? key, required this.userProvider}) : super(key: key);
 
+  @override
+  State<DrawerSide> createState() => _DrawerSideState();
+}
+
+class _DrawerSideState extends State<DrawerSide> {
   Widget listContent(
       {required String title,
       required IconData iconData,
@@ -26,6 +35,7 @@ class DrawerSide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userData = widget.userProvider.currentUserData;
     return Drawer(
       child: Container(
         width: 100,
@@ -33,43 +43,35 @@ class DrawerSide extends StatelessWidget {
         child: ListView(
           children: [
             DrawerHeader(
-              child: Row(
-                children: [
-                  const CircleAvatar(
-                    backgroundColor: Colors.white54,
-                    radius: 43,
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: NetworkImage(
-                          'https://img.freepik.com/premium-vector/cute-bakery-cake-logo_23-2148453860.jpg'),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.white54,
+                      radius: 43,
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage: NetworkImage(userData.userImage ??
+                            'https://img.freepik.com/premium-vector/cute-bakery-cake-logo_23-2148453860.jpg'),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Welcome Guest'),
-                      const SizedBox(
-                        height: 7,
-                      ),
-                      SizedBox(
-                        height: 30,
-                        child: MaterialButton(
-                          onPressed: () {},
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            side: const BorderSide(
-                              width: 2,
-                            ),
-                          ),
-                          child: const Text('Login'),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(userData.userName),
+                        Text(
+                          userData.userEmail,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
             listContent(
@@ -94,7 +96,9 @@ class DrawerSide extends StatelessWidget {
               title: 'My Profile',
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const MyProfile(),
+                  builder: (context) => MyProfile(
+                    userProvider: widget.userProvider,
+                  ),
                 ));
               },
             ),
@@ -111,7 +115,10 @@ class DrawerSide extends StatelessWidget {
             listContent(
               iconData: Icons.favorite_outline_sharp,
               title: 'Wishist',
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const WishLsit()));
+              },
             ),
             listContent(
               iconData: Icons.copy_outlined,

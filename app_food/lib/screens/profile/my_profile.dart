@@ -1,9 +1,12 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/providers/user_provider.dart';
 import 'package:app_food/screens/home/drawer_side.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MyProfile extends StatefulWidget {
-  const MyProfile({Key? key}) : super(key: key);
+  UserProvider userProvider;
+  MyProfile({required this.userProvider, Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -28,6 +31,7 @@ class _MyProfileState extends State<MyProfile> {
 
   @override
   Widget build(BuildContext context) {
+    var userData = widget.userProvider.currentUserData;
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
@@ -42,9 +46,9 @@ class _MyProfileState extends State<MyProfile> {
           ),
         ),
       ),
-      drawer: const DrawerSide(
-          //   userProvider: widget.userProvider,
-          ),
+      drawer: DrawerSide(
+        userProvider: widget.userProvider,
+      ),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -83,7 +87,7 @@ class _MyProfileState extends State<MyProfile> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Assar Bugti',
+                                      userData.userName,
                                       style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
@@ -92,7 +96,7 @@ class _MyProfileState extends State<MyProfile> {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    const Text('support@gmail.com'),
+                                    Text(userData.userEmail),
                                   ],
                                 ),
                                 CircleAvatar(
@@ -139,8 +143,9 @@ class _MyProfileState extends State<MyProfile> {
                 radius: 50,
                 backgroundColor: primaryColor,
                 child: CircleAvatar(
-                    backgroundImage: const NetworkImage(
-                      "https://img.freepik.com/premium-vector/cute-bakery-cake-logo_23-2148453860.jpg",
+                    backgroundImage: NetworkImage(
+                      userData.userImage ??
+                          "https://img.freepik.com/premium-vector/cute-bakery-cake-logo_23-2148453860.jpg",
                     ),
                     radius: 45,
                     backgroundColor: scaffoldBackgroundColor),
