@@ -1,10 +1,7 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'package:app_food/config/color.dart';
 import 'package:app_food/providers/review_cart_provider.dart';
 import 'package:app_food/widgets/count.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -14,7 +11,7 @@ class SingleItem extends StatefulWidget {
       required this.productImage,
       required this.productName,
       required this.productPrice,
-      this.productId,
+      required this.productId,
       this.productQuantity,
       this.onDelete,
       this.wishList,
@@ -26,27 +23,19 @@ class SingleItem extends StatefulWidget {
   String productName;
   bool? wishList = false;
   int productPrice;
-  String? productId;
+  String productId;
   int? productQuantity;
   Function()? onDelete;
-  //var productUnit;
 
   @override
   State<SingleItem> createState() => _SingleItemState();
 }
 
 class _SingleItemState extends State<SingleItem> {
-  late int count;
-  getCount() {
-    setState(() {
-      count = widget.productQuantity!;
-    });
-  }
+    late ReviewCartProvider reviewCartProvider;
 
-  late ReviewCartProvider reviewCartProvider;
   @override
   Widget build(BuildContext context) {
-    getCount();
     reviewCartProvider = Provider.of<ReviewCartProvider>(context);
     reviewCartProvider.getReviewCartData();
     return Column(
@@ -104,7 +93,7 @@ class _SingleItemState extends State<SingleItem> {
                       : const EdgeInsets.only(left: 15, right: 15),
                   child: widget.isBool == false
                       ? Count(
-                          productId: widget.productId!,
+                          productId: widget.productId,
                           productImage: widget.productImage,
                           productName: widget.productName,
                           productPrice: widget.productPrice,
@@ -137,66 +126,21 @@ class _SingleItemState extends State<SingleItem> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            InkWell(
-                                              onTap: () {
-                                                if (count == 1) {
-                                                  Fluttertoast.showToast(
-                                                    msg:
-                                                        "You reach minimum limit",
-                                                  );
-                                                } else {
-                                                  setState(() {
-                                                    count--;
-                                                  });
-                                                  reviewCartProvider
-                                                      .updateReviewCartData(
-                                                    cartImage:
-                                                        widget.productImage,
-                                                    cartId: widget.productId!,
-                                                    cartName:
-                                                        widget.productName,
-                                                    cartPrice:
-                                                        widget.productPrice,
-                                                    cartQuantity: count,
-                                                  );
-                                                }
-                                              },
-                                              child: Icon(
-                                                Icons.remove,
-                                                color: secondColor,
-                                                size: 20,
-                                              ),
+                                            Icon(
+                                              Icons.remove,
+                                              color: secondColor,
+                                              size: 20,
                                             ),
                                             Text(
-                                              '$count',
+                                              '1',
                                               style: TextStyle(
                                                 color: secondColor,
                                               ),
                                             ),
-                                            InkWell(
-                                              onTap: () {
-                                                if (count < 10) {
-                                                  setState(() {
-                                                    count++;
-                                                  });
-                                                  reviewCartProvider
-                                                      .updateReviewCartData(
-                                                    cartImage:
-                                                        widget.productImage,
-                                                    cartId: widget.productId!,
-                                                    cartName:
-                                                        widget.productName,
-                                                    cartPrice:
-                                                        widget.productPrice,
-                                                    cartQuantity: count,
-                                                  );
-                                                }
-                                              },
-                                              child: Icon(
-                                                Icons.add,
-                                                color: secondColor,
-                                                size: 20,
-                                              ),
+                                            Icon(
+                                              Icons.add,
+                                              color: secondColor,
+                                              size: 20,
                                             ),
                                           ],
                                         ),

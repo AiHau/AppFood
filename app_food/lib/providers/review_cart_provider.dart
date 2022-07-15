@@ -68,7 +68,6 @@ class ReviewCartProvider with ChangeNotifier {
         cartName: element.get("cartName"),
         cartPrice: element.get("cartPrice"),
         cartQuantity: element.get("cartQuantity"),
-        //cartUnit: element.get("cartUnit"),
       );
       newList.add(reviewCartModel);
     }
@@ -79,8 +78,17 @@ class ReviewCartProvider with ChangeNotifier {
   List<ReviewCartModel> get getReviewCartDataList {
     return reviewCartDataList;
   }
+//// TotalPrice  ///
 
-////////////// ReviCartDeleteFunction ////////////
+  getTotalPrice() {
+    double total = 0.0;
+    for (var element in reviewCartDataList) {
+      total += element.cartPrice * element.cartQuantity;
+    }
+    return total;
+  }
+
+////////////// ReviewCartDeleteFunction ////////////
   reviewCartDataDelete(cartId) {
     FirebaseFirestore.instance
         .collection("ReviewCart")

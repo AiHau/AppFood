@@ -1,8 +1,10 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, prefer_if_null_operators
+
 import 'package:app_food/config/color.dart';
 import 'package:app_food/widgets/count.dart';
 import 'package:flutter/material.dart';
 
-class SignalProducts extends StatelessWidget {
+class SignalProducts extends StatefulWidget {
   const SignalProducts({
     Key? key,
     required this.productImage,
@@ -10,15 +12,33 @@ class SignalProducts extends StatelessWidget {
     required this.onTap,
     required this.productPrice,
     required this.productId,
+    //required this.productUnit,
   }) : super(key: key);
   final String productId;
   final String productImage;
   final String productName;
   final int productPrice;
+  //final ProductModel productUnit;
   final Function() onTap;
 
   @override
+  State<SignalProducts> createState() => _SignalProductsState();
+}
+
+class _SignalProductsState extends State<SignalProducts> {
+  var unitData;
+  var firstValue;
+
+  @override
   Widget build(BuildContext context) {
+    // widget.productUnit.productUnit!.firstWhere(
+    //   (element) {
+    //     setState(() {
+    //       firstValue = element;
+    //     });
+    //     return true;
+    //   },
+    // );
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -35,12 +55,12 @@ class SignalProducts extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
-                  onTap: onTap,
+                  onTap: widget.onTap,
                   child: Container(
                     height: 150,
                     padding: const EdgeInsets.all(5),
                     width: double.infinity,
-                    child: Image.network(productImage),
+                    child: Image.network(widget.productImage),
                   ),
                 ),
                 Expanded(
@@ -52,55 +72,31 @@ class SignalProducts extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            productName,
+                            widget.productName,
                             style: TextStyle(
                                 color: textColor, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            '$productPrice\$/50 Gram',
-                            style: const TextStyle(color: Colors.grey),
                           ),
                           const SizedBox(
                             height: 5,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Expanded(
-                                child: InkWell(
-                                  child: Container(
-                                    padding: const EdgeInsets.only(left: 5),
-                                    height: 25,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Row(
-                                      children: const [
-                                        Expanded(
-                                            child: Text(
-                                          '50 Gram',
-                                          style: TextStyle(fontSize: 11),
-                                        )),
-                                        Center(
-                                          child: Icon(
-                                            Icons.arrow_drop_down,
-                                            size: 20,
-                                            color: Colors.yellow,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                              Text(
+                                '${widget.productPrice}\$',
+                                style: const TextStyle(color: Colors.grey),
+                              ),
+                              const SizedBox(
+                                width: 5,
                               ),
                               const SizedBox(
                                 width: 5,
                               ),
                               Count(
-                                productId: productId,
-                                productImage: productImage,
-                                productName: productName,
-                                productPrice: productPrice,
+                                productId: widget.productId,
+                                productImage: widget.productImage,
+                                productName: widget.productName,
+                                productPrice: widget.productPrice,
                               ),
                             ],
                           )

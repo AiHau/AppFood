@@ -1,6 +1,6 @@
 import 'package:app_food/config/color.dart';
 import 'package:app_food/models/product_model.dart';
-import 'package:app_food/widgets/single_item.dart';
+import 'package:app_food/screens/search/search_item.dart';
 import 'package:flutter/material.dart';
 
 enum SinginCharacter { lowToHignt, hightToLow, alphabetically }

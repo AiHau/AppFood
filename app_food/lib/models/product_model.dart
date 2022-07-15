@@ -4,12 +4,9 @@ class ProductModel {
   int productPrice;
   String productId;
   int? productQuantity;
-  // List<dynamic>productUnit;
   ProductModel(
-      {
-       this.productQuantity,
+      {this.productQuantity,
       required this.productId,
-      //required this.productUnit,
       required this.productImage,
       required this.productName,
       required this.productPrice});

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:app_food/config/color.dart';
 import 'package:app_food/providers/review_cart_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -54,7 +56,6 @@ class _CountState extends State<Count> {
 
   @override
   Widget build(BuildContext context) {
-    //getAddAndQuantity();
 
     ReviewCartProvider reviewCartProvider = Provider.of(context);
     return Container(

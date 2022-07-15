@@ -127,10 +127,10 @@ class _ProductOverViewState extends State<ProductOverView> {
             iconData: Icons.shopping_bag_outlined,
             onTap: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ReviewCart(),
-                  ),
-                );
+                MaterialPageRoute(
+                  builder: (context) => ReviewCart(),
+                ),
+              );
             },
           ),
         ],
@@ -151,7 +151,6 @@ class _ProductOverViewState extends State<ProductOverView> {
               children: [
                 ListTile(
                   title: Text(widget.productName),
-                  subtitle: const Text("\$50"),
                 ),
                 Container(
                   height: 250,
@@ -200,6 +199,7 @@ class _ProductOverViewState extends State<ProductOverView> {
                         productImage: widget.productImage,
                         productName: widget.productName,
                         productPrice: widget.productPrice,
+                        // productUnit: '50 Gram',
                       ),
                     ],
                   ),

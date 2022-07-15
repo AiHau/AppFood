@@ -33,7 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
     userProvider.getUserData();
     return Scaffold(
       backgroundColor: const Color(0xffcbcbcb),
-      drawer: DrawerSide(userProvider: userProvider,),
+      drawer: DrawerSide(
+        userProvider: userProvider,
+      ),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(

@@ -82,6 +82,7 @@ class _WishLsitState extends State<WishLsit> {
                 onDelete: () {
                   showAlertDialog(context, data);
                 },
+                wishList: false,
               ),
             ],
           );
