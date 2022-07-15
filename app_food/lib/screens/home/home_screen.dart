@@ -251,27 +251,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-class ListContent extends StatelessWidget {
-  const ListContent({
-    Key? key,
-    required this.icon,
-    required this.title,
-  }) : super(key: key);
-  final IconData icon;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        size: 32,
-      ),
-      title: Text(
-        title,
-        style: const TextStyle(color: Colors.black45),
-      ),
-    );
-  }
-}

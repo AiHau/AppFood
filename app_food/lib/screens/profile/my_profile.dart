@@ -1,4 +1,5 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/config/spacing.dart';
 import 'package:app_food/providers/user_provider.dart';
 import 'package:app_food/screens/home/drawer_side.dart';
 import 'package:flutter/material.dart';
@@ -93,9 +94,7 @@ class _MyProfileState extends State<MyProfile> {
                                           fontWeight: FontWeight.bold,
                                           color: textColor),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
+                                    yHeight1,
                                     Text(userData.userEmail),
                                   ],
                                 ),

@@ -1,4 +1,5 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/config/spacing.dart';
 import 'package:app_food/providers/review_cart_provider.dart';
 import 'package:app_food/widgets/count.dart';
 import 'package:flutter/material.dart';
@@ -110,9 +111,7 @@ class _SingleItemState extends State<SingleItem> {
                                   color: Colors.black54,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 5,
-                              ),
+                              yHeight05,
                               widget.wishList == false
                                   ? Container(
                                       height: 25,

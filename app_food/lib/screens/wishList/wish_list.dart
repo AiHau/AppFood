@@ -1,7 +1,8 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/config/spacing.dart';
 import 'package:app_food/models/product_model.dart';
 import 'package:app_food/providers/wishlist_provider.dart';
-import 'package:app_food/widgets/single_item.dart';
+import 'package:app_food/screens/wishList/wish_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -69,9 +70,7 @@ class _WishLsitState extends State<WishLsit> {
           ProductModel data = wishListProvider.getWishList[index];
           return Column(
             children: [
-              const SizedBox(
-                height: 10,
-              ),
+              yHeight1,
               SingleItem(
                 isBool: true,
                 productImage: data.productImage,
@@ -82,7 +81,7 @@ class _WishLsitState extends State<WishLsit> {
                 onDelete: () {
                   showAlertDialog(context, data);
                 },
-                wishList: false,
+                
               ),
             ],
           );

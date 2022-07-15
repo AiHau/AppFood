@@ -1,10 +1,12 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/config/spacing.dart';
 import 'package:app_food/providers/wishlist_provider.dart';
 import 'package:app_food/screens/review_cart/review_cart.dart';
 import 'package:app_food/widgets/count.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 enum SinginCharacter { fill, outline }
@@ -51,9 +53,7 @@ class _ProductOverViewState extends State<ProductOverView> {
                 size: 20,
                 color: iconColor,
               ),
-              const SizedBox(
-                width: 5,
-              ),
+              xWidth05,
               Text(
                 title,
                 style: TextStyle(color: color),
@@ -178,10 +178,6 @@ class _ProductOverViewState extends State<ProductOverView> {
                     children: [
                       Row(
                         children: [
-                          CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.green[700],
-                          ),
                           Radio(
                               value: SinginCharacter.fill,
                               groupValue: _character,
@@ -222,12 +218,10 @@ class _ProductOverViewState extends State<ProductOverView> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    yHeight2,
                     Text(
-                      "of a customer. Wikipedi In marketing, a product is an object or system made available for consumer use; it is anything that can be offered to a market to satisfy the desire or need of a customer. Wikipedi",
-                      style: TextStyle(
+                      widget.productName,
+                      style: GoogleFonts.mulish(
                         fontSize: 16,
                         color: textColor,
                       ),

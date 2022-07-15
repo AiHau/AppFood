@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, prefer_if_null_operators
 
 import 'package:app_food/config/color.dart';
+import 'package:app_food/config/spacing.dart';
 import 'package:app_food/widgets/count.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +13,11 @@ class SignalProducts extends StatefulWidget {
     required this.onTap,
     required this.productPrice,
     required this.productId,
-    //required this.productUnit,
   }) : super(key: key);
   final String productId;
   final String productImage;
   final String productName;
   final int productPrice;
-  //final ProductModel productUnit;
   final Function() onTap;
 
   @override
@@ -26,19 +25,8 @@ class SignalProducts extends StatefulWidget {
 }
 
 class _SignalProductsState extends State<SignalProducts> {
-  var unitData;
-  var firstValue;
-
   @override
   Widget build(BuildContext context) {
-    // widget.productUnit.productUnit!.firstWhere(
-    //   (element) {
-    //     setState(() {
-    //       firstValue = element;
-    //     });
-    //     return true;
-    //   },
-    // );
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -76,21 +64,13 @@ class _SignalProductsState extends State<SignalProducts> {
                             style: TextStyle(
                                 color: textColor, fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          yHeight05,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 '${widget.productPrice}\$',
                                 style: const TextStyle(color: Colors.grey),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const SizedBox(
-                                width: 5,
                               ),
                               Count(
                                 productId: widget.productId,

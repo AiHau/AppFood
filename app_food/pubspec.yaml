@@ -41,8 +41,10 @@ dependencies:
   provider: ^6.0.3
   fluttertoast: ^8.0.9
   location: ^4.4.0 
+  google_fonts: 
   google_maps_flutter: 
   pay: ^1.0.10
+  
 
 dev_dependencies:
   flutter_test:

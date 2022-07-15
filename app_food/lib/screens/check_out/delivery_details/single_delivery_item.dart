@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
 
 import 'package:app_food/config/color.dart';
+import 'package:app_food/config/spacing.dart';
 import 'package:flutter/material.dart';
 
 class SingleDeliveryItem extends StatelessWidget {
@@ -8,7 +9,11 @@ class SingleDeliveryItem extends StatelessWidget {
   final String address;
   final String number;
   final String addressType;
-  SingleDeliveryItem({required this.title, required this.addressType, required this.address, required this.number});
+  SingleDeliveryItem(
+      {required this.title,
+      required this.addressType,
+      required this.address,
+      required this.number});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +28,8 @@ class SingleDeliveryItem extends StatelessWidget {
                 padding: const EdgeInsets.all(1),
                 height: 20,
                 decoration: BoxDecoration(
-                    color: primaryColor, borderRadius: BorderRadius.circular(10)),
+                    color: primaryColor,
+                    borderRadius: BorderRadius.circular(10)),
                 child: Center(
                   child: Text(
                     addressType,
@@ -38,17 +44,15 @@ class SingleDeliveryItem extends StatelessWidget {
           ),
           leading: CircleAvatar(
             radius: 8,
-            backgroundColor:primaryColor,
+            backgroundColor: primaryColor,
           ),
           subtitle: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            Text(address),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(number),
+              Text(address),
+              yHeight05,
+              Text(number),
             ],
           ),
         ),

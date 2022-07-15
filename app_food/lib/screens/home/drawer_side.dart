@@ -1,4 +1,5 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/config/spacing.dart';
 import 'package:app_food/providers/user_provider.dart';
 import 'package:app_food/screens/home/home_screen.dart';
 import 'package:app_food/screens/profile/my_profile.dart';
@@ -56,9 +57,7 @@ class _DrawerSideState extends State<DrawerSide> {
                             'https://img.freepik.com/premium-vector/cute-bakery-cake-logo_23-2148453860.jpg'),
                       ),
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
+                    xWidth2,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -137,30 +136,22 @@ class _DrawerSideState extends State<DrawerSide> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Contact Support'),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  yHeight2,
                   Row(
-                    children: const [
-                      Text('Call us:'),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text('+9248593898'),
+                    children: [
+                      const Text('Call us:'),
+                      xWidth1,
+                      const Text('+9248593898'),
                     ],
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  yHeight05,
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: const [
-                        Text('Mail us:'),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
+                      children: [
+                        const Text('Mail us:'),
+                        xWidth1,
+                        const Text(
                           'support@gmail.com',
                           overflow: TextOverflow.ellipsis,
                         )

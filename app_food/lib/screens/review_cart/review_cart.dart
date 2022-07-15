@@ -1,4 +1,5 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/config/spacing.dart';
 import 'package:app_food/models/review_cart_model.dart';
 import 'package:app_food/providers/review_cart_provider.dart';
 import 'package:app_food/screens/check_out/delivery_details/delivery_details.dart';
@@ -103,9 +104,7 @@ class ReviewCart extends StatelessWidget {
                     reviewCartProvider.getReviewCartDataList[index];
                 return Column(
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    yHeight1,
                     SingleItem(
                       isBool: true,
                       wishList: false,

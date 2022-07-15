@@ -1,8 +1,10 @@
+import 'package:app_food/config/spacing.dart';
 import 'package:app_food/providers/user_provider.dart';
 import 'package:app_food/screens/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -61,49 +63,65 @@ class _SignInState extends State<SignIn> {
             image: AssetImage('assets/background.jpg'),
           ),
         ),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SizedBox(
-            height: 200,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Text('Sign in to continue'),
-                Text(
-                  'Food',
-                  style: TextStyle(fontSize: 50, color: Colors.white, shadows: [
-                    BoxShadow(
-                      blurRadius: 5,
-                      color: Colors.green.shade900,
-                      offset: const Offset(3, 3),
-                    )
-                  ]),
-                ),
-                Column(
-                  children: [
-                    SignInButton(
-                      Buttons.Apple,
-                      text: "Sign up with Apple",
-                      onPressed: () {},
+        child: Padding(
+          padding: const EdgeInsets.only(top: 100),
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            SizedBox(
+              height: 300,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(height: 110, child: Image.asset('assets/cake.png')),
+                  Text(
+                    'Food',
+                    style: GoogleFonts.dancingScript(
+                      textStyle: TextStyle(
+                          fontSize: 50,
+                          color: Colors.white,
+                          shadows: [
+                            BoxShadow(
+                              blurRadius: 5,
+                              color: Colors.green.shade900,
+                              offset: const Offset(3, 3),
+                            )
+                          ]),
                     ),
-                    SignInButton(
-                      Buttons.Google,
-                      text: "Sign up with Google",
-                      onPressed: () {
-                        _googleSignUp().then(
-                          (value) => Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
-                            ),
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        'Sign up',
+                        style: GoogleFonts.roboto(
+                            textStyle: const TextStyle(fontSize: 18),
+                            color: Colors.pinkAccent),
+                      ),
+                      yHeight1,
+                      SizedBox(
+                        height: 40,
+                        child: SignInButton(
+                          Buttons.Google,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        );
-                      },
-                    )
-                  ],
-                ),
-              ],
+                          text: "Sign up with Google",
+                          onPressed: () {
+                            _googleSignUp().then(
+                              (value) => Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => const HomeScreen(),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }

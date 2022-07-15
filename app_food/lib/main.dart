@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:app_food/auth/sign_in.dart';
 import 'package:app_food/config/color.dart';
 import 'package:app_food/providers/check_out_provider.dart';

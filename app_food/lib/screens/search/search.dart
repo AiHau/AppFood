@@ -1,4 +1,5 @@
 import 'package:app_food/config/color.dart';
+import 'package:app_food/config/spacing.dart';
 import 'package:app_food/models/product_model.dart';
 import 'package:app_food/screens/search/search_item.dart';
 import 'package:flutter/material.dart';
@@ -139,9 +140,7 @@ class _SearchState extends State<Search> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            yHeight1,
             Column(
               children: _searchItem.map((data) {
                 return SingleItem(

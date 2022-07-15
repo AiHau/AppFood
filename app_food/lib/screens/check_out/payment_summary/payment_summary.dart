@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 
 class PaymentSummary extends StatefulWidget {
   final DeliveryAddressModel deliverAddressList;
-  const PaymentSummary({Key? key, required this.deliverAddressList}) : super(key: key);
+  const PaymentSummary({Key? key, required this.deliverAddressList})
+      : super(key: key);
 
   @override
   _PaymentSummaryState createState() => _PaymentSummaryState();
@@ -30,14 +31,15 @@ class _PaymentSummaryState extends State<PaymentSummary> {
     reviewCartProvider.getReviewCartData();
 
     double discount = 30;
-    double discountValue=0;
+    double discountValue = 0;
+    double shipping = 15;
     double total = 0;
     double totalPrice = reviewCartProvider.getTotalPrice();
-    if (totalPrice > 300) {
+    if (totalPrice > 100) {
       discountValue = (totalPrice * discount) / 100;
       total = totalPrice - discountValue;
     }
-
+    total = totalPrice;
     return Scaffold(
       appBar: AppBar(
         foregroundColor: textColor,
@@ -50,7 +52,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
       bottomNavigationBar: ListTile(
         title: const Text("Total Amount"),
         subtitle: Text(
-          "\$${total + 5}",
+          "\$${total + shipping - discountValue}",
           style: TextStyle(
             color: Colors.green[900],
             fontWeight: FontWeight.bold,
@@ -60,9 +62,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
         trailing: SizedBox(
           width: 160,
           child: MaterialButton(
-            onPressed: () {
-            
-            },
+            onPressed: () {},
             color: primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
@@ -117,7 +117,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                     ),
                   ),
                   trailing: Text(
-                    "\$${totalPrice + 5}",
+                    "\$$totalPrice",
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -130,7 +130,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                     style: TextStyle(color: Colors.grey[600]),
                   ),
                   trailing: Text(
-                    "\$$discountValue",
+                    "\$$shipping",
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -139,12 +139,12 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                 ListTile(
                   minVerticalPadding: 5,
                   leading: Text(
-                    "Compen Discount",
+                    "Discount",
                     style: TextStyle(color: Colors.grey[600]),
                   ),
-                  trailing: const Text(
-                    "\$10",
-                    style: TextStyle(
+                  trailing: Text(
+                    "-\$$discountValue",
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
