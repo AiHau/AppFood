@@ -16,6 +16,7 @@ class ProductOverView extends StatefulWidget {
   final String productImage;
   final int productPrice;
   final String productId;
+  final String? productContent;
 
   const ProductOverView({
     Key? key,
@@ -23,6 +24,7 @@ class ProductOverView extends StatefulWidget {
     required this.productImage,
     required this.productPrice,
     required this.productId,
+     this.productContent,
   }) : super(key: key);
 
   @override
@@ -220,7 +222,7 @@ class _ProductOverViewState extends State<ProductOverView> {
                     ),
                     yHeight2,
                     Text(
-                      widget.productName,
+                      widget.productContent!,
                       style: GoogleFonts.mulish(
                         fontSize: 16,
                         color: textColor,

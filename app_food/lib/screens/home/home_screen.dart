@@ -7,6 +7,7 @@ import 'package:app_food/screens/product_overview/product_overview.dart';
 import 'package:app_food/screens/review_cart/review_cart.dart';
 import 'package:app_food/screens/search/search.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -115,14 +116,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               bottomLeft: Radius.circular(50),
                             ),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               'Food',
-                              style: TextStyle(
-                                  fontSize: 20,
+                              style: GoogleFonts.dancingScript(
+                                  fontSize: 25,
                                   color: Colors.white,
                                   shadows: [
-                                    BoxShadow(
+                                    const BoxShadow(
                                         color: Colors.green,
                                         blurRadius: 10,
                                         offset: Offset(3, 3))
@@ -156,7 +157,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Food'),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -188,6 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 productPrice: foodProductData.productPrice,
                                 productName: foodProductData.productName,
                                 productImage: foodProductData.productImage,
+                                productContent: foodProductData.productContent,
                               )));
                     },
                     productId: foodProductData.productId,
@@ -235,6 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 productPrice: dinkProductData.productPrice,
                                 productName: dinkProductData.productName,
                                 productImage: dinkProductData.productImage,
+                                productContent: dinkProductData.productContent,
                               )));
                     },
                     productId: dinkProductData.productId,
