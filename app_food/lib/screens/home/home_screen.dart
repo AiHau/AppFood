@@ -1,4 +1,4 @@
-import 'package:app_food/config/color.dart';
+import 'package:app_food/config/components.dart';
 import 'package:app_food/providers/product_provider.dart';
 import 'package:app_food/providers/user_provider.dart';
 import 'package:app_food/screens/home/drawer_side.dart';
@@ -33,15 +33,15 @@ class _HomeScreenState extends State<HomeScreen> {
     UserProvider userProvider = Provider.of(context);
     userProvider.getUserData();
     return Scaffold(
-      backgroundColor: const Color(0xffcbcbcb),
+      backgroundColor: background,
       drawer: DrawerSide(
         userProvider: userProvider,
       ),
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
-        title: const Text(
+        iconTheme: IconThemeData(color: textColor),
+        title: Text(
           'Home',
-          style: TextStyle(color: Colors.black, fontSize: 17),
+          style: TextStyle(color: textColor, fontSize: 17),
         ),
         actions: [
           CircleAvatar(
@@ -54,10 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           search: productProvider.getAllProductSearch,
                         )));
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.search,
                 size: 17,
-                color: Colors.black,
+                color: textColor,
               ),
             ),
           ),
@@ -118,10 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              'Food',
+                              Strings.appTitle,
                               style: GoogleFonts.dancingScript(
                                   fontSize: 25,
-                                  color: Colors.white,
+                                  color: textSale,
                                   shadows: [
                                     const BoxShadow(
                                         color: Colors.green,
@@ -133,17 +133,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Text(
-                        '30% Off',
+                        Strings.numberSale,
                         style: TextStyle(
                             fontSize: 40,
-                            color: Colors.green[100],
+                            color: numberSale,
                             fontWeight: FontWeight.bold),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 20),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
                         child: Text(
-                          'On all vegetable products',
-                          style: TextStyle(color: Colors.white),
+                          Strings.textSale,
+                          style: TextStyle(color: textSale),
                         ),
                       )
                     ],
@@ -157,6 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  const Text(Strings.appTitle),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -168,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                     child: const Text(
-                      'View all',
+                      Strings.textView,
                       style: TextStyle(color: Colors.grey),
                     ),
                   ),
@@ -204,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Dink'),
+                  const Text(Strings.textDrink),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(

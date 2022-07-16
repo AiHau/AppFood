@@ -102,16 +102,6 @@ class _DrawerSideState extends State<DrawerSide> {
               },
             ),
             listContent(
-              iconData: Icons.notifications_outlined,
-              title: 'Notification',
-              onTap: () {},
-            ),
-            listContent(
-              iconData: Icons.star_outline,
-              title: 'Rating & Review',
-              onTap: () {},
-            ),
-            listContent(
               iconData: Icons.favorite_outline_sharp,
               title: 'Wishist',
               onTap: () {
@@ -119,16 +109,7 @@ class _DrawerSideState extends State<DrawerSide> {
                     MaterialPageRoute(builder: (context) => const WishLsit()));
               },
             ),
-            listContent(
-              iconData: Icons.copy_outlined,
-              title: 'Raise a Complaint',
-              onTap: () {},
-            ),
-            listContent(
-              iconData: Icons.format_quote_outlined,
-              title: 'FAQs',
-              onTap: () {},
-            ),
+            yHeight10,
             Container(
               height: 350,
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -136,7 +117,9 @@ class _DrawerSideState extends State<DrawerSide> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Contact Support'),
-                  yHeight2,
+                  yHeight1,
+                  const Divider(),
+                  yHeight1,
                   Row(
                     children: [
                       const Text('Call us:'),
@@ -144,7 +127,7 @@ class _DrawerSideState extends State<DrawerSide> {
                       const Text('+9248593898'),
                     ],
                   ),
-                  yHeight05,
+                  yHeight1,
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(

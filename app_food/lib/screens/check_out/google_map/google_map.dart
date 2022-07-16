@@ -16,7 +16,10 @@ class CostomGoogleMap extends StatefulWidget {
 }
 
 class _GoogleMapState extends State<CostomGoogleMap> {
-  final LatLng _initialcameraposition = const LatLng(20.5937, 78.9629);
+  final LatLng _initialcameraposition = const LatLng(
+    16,
+    108,
+  );
   late GoogleMapController controller;
   final Location _location = Location();
   void _onMapCreated(GoogleMapController _value) {
@@ -25,7 +28,7 @@ class _GoogleMapState extends State<CostomGoogleMap> {
       controller.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-              target: LatLng(event.latitude!, event.longitude!), zoom: 15),
+              target: LatLng(event.latitude!, event.longitude!), zoom: 5),
         ),
       );
     });
@@ -42,11 +45,11 @@ class _GoogleMapState extends State<CostomGoogleMap> {
           child: Stack(
             children: [
               GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: _initialcameraposition,
-                ),
+                initialCameraPosition:
+                    CameraPosition(target: _initialcameraposition, zoom: 17),
                 mapType: MapType.normal,
                 onMapCreated: _onMapCreated,
+                myLocationEnabled: true,
               ),
               Positioned(
                 bottom: 0,
@@ -55,8 +58,8 @@ class _GoogleMapState extends State<CostomGoogleMap> {
                 child: Container(
                   height: 50,
                   width: double.infinity,
-                  margin:
-                      const EdgeInsets.only(right: 60, left: 10, bottom: 40, top: 40),
+                  margin: const EdgeInsets.only(
+                      right: 60, left: 10, bottom: 40, top: 40),
                   child: MaterialButton(
                     onPressed: () async {
                       await _location.getLocation().then((value) {

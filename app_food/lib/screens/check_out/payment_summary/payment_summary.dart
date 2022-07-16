@@ -5,6 +5,7 @@ import 'package:app_food/models/delivery_address_model.dart';
 import 'package:app_food/providers/review_cart_provider.dart';
 import 'package:app_food/screens/check_out/delivery_details/single_delivery_item.dart';
 import 'package:app_food/screens/check_out/payment_summary/order_item.dart';
+import 'package:app_food/screens/my_order/my_order.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -62,13 +63,16 @@ class _PaymentSummaryState extends State<PaymentSummary> {
         trailing: SizedBox(
           width: 160,
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const CartHistory()));
+            },
             color: primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
             child: Text(
-              "Pleace Order",
+              "Place Order",
               style: TextStyle(
                 color: textColor,
               ),
@@ -85,7 +89,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
               children: [
                 SingleDeliveryItem(
                   address:
-                      "aera, ${widget.deliverAddressList.aera}, street, ${widget.deliverAddressList.street}, society ${widget.deliverAddressList.scoiety}, pincode ${widget.deliverAddressList.pinCode}",
+                      " ${widget.deliverAddressList.street} street, pincode: ${widget.deliverAddressList.pinCode}, ${widget.deliverAddressList.scoiety}",
                   title:
                       "${widget.deliverAddressList.firstName} ${widget.deliverAddressList.lastName}",
                   number: widget.deliverAddressList.mobileNo,

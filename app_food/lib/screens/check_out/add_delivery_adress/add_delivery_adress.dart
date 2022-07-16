@@ -78,10 +78,6 @@ class _AddDeliverAddressState extends State<AddDeliverAddress> {
               controller: checkoutProvider.mobileNo,
             ),
             CostomTextField(
-              labText: "Alternate Mobile No",
-              controller: checkoutProvider.alternateMobileNo,
-            ),
-            CostomTextField(
               labText: "Scoiety",
               controller: checkoutProvider.scoiety,
             ),
@@ -90,16 +86,8 @@ class _AddDeliverAddressState extends State<AddDeliverAddress> {
               controller: checkoutProvider.street,
             ),
             CostomTextField(
-              labText: "Landmark",
-              controller: checkoutProvider.landmark,
-            ),
-            CostomTextField(
               labText: "City",
               controller: checkoutProvider.city,
-            ),
-            CostomTextField(
-              labText: "Aera",
-              controller: checkoutProvider.aera,
             ),
             CostomTextField(
               labText: "Pincode",

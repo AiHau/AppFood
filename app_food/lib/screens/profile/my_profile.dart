@@ -1,7 +1,13 @@
+import 'package:app_food/auth/sign_in.dart';
 import 'package:app_food/config/color.dart';
 import 'package:app_food/config/spacing.dart';
 import 'package:app_food/providers/user_provider.dart';
+import 'package:app_food/screens/check_out/delivery_details/delivery_details.dart';
 import 'package:app_food/screens/home/drawer_side.dart';
+import 'package:app_food/screens/my_order/my_order.dart';
+import 'package:app_food/screens/profile/about_app.dart';
+import 'package:app_food/screens/profile/privacy_policy.dart';
+import 'package:app_food/screens/profile/terms_and_conditions.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -115,22 +121,58 @@ class _MyProfileState extends State<MyProfile> {
                           ),
                         ],
                       ),
-                      listTile(
-                          icon: Icons.shopping_bag_outlined,
-                          title: "My Orders"),
-                      listTile(
-                          icon: Icons.location_on_outlined,
-                          title: "My Delivery Address"),
-                      listTile(
-                          icon: Icons.person_outline, title: "Refer A Friends"),
-                      listTile(
-                          icon: Icons.file_copy_outlined,
-                          title: "Terms & Conditions"),
-                      listTile(
-                          icon: Icons.policy_outlined, title: "Privacy Policy"),
-                      listTile(icon: Icons.add_chart, title: "About"),
-                      listTile(
-                          icon: Icons.exit_to_app_outlined, title: "Log Out"),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const CartHistory()));
+                        },
+                        child: listTile(
+                            icon: Icons.shopping_bag_outlined,
+                            title: "My Orders"),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const DeliveryDetails()));
+                        },
+                        child: listTile(
+                            icon: Icons.location_on_outlined,
+                            title: "My Delivery Address"),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  const TermsAndConditions()));
+                        },
+                        child: listTile(
+                            icon: Icons.file_copy_outlined,
+                            title: "Terms & Conditions"),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const PrivacyPolicy()));
+                        },
+                        child: listTile(
+                            icon: Icons.policy_outlined,
+                            title: "Privacy Policy"),
+                      ),
+                      InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const AboutApp()));
+                          },
+                          child:
+                              listTile(icon: Icons.add_chart, title: "About")),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const SignIn()));
+                        },
+                        child: listTile(
+                            icon: Icons.exit_to_app_outlined, title: "Log Out"),
+                      ),
                     ],
                   ),
                 )

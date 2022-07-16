@@ -24,7 +24,7 @@ class ProductOverView extends StatefulWidget {
     required this.productImage,
     required this.productPrice,
     required this.productId,
-     this.productContent,
+    this.productContent,
   }) : super(key: key);
 
   @override
@@ -197,11 +197,24 @@ class _ProductOverViewState extends State<ProductOverView> {
                         productImage: widget.productImage,
                         productName: widget.productName,
                         productPrice: widget.productPrice,
-                        // productUnit: '50 Gram',
                       ),
                     ],
                   ),
-                )
+                ),
+                yHeight1,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  width: double.infinity,
+                  child: Text(
+                    "About This Product",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -213,19 +226,14 @@ class _ProductOverViewState extends State<ProductOverView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "About This Product",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
                     yHeight2,
-                    Text(
-                      widget.productContent!,
-                      style: GoogleFonts.mulish(
-                        fontSize: 16,
-                        color: textColor,
+                    Center(
+                      child: Text(
+                        widget.productContent!,
+                        style: GoogleFonts.mulish(
+                          fontSize: 16,
+                          color: textColor,
+                        ),
                       ),
                     ),
                   ],

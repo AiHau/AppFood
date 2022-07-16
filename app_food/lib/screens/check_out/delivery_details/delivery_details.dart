@@ -93,7 +93,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                     });
                     return SingleDeliveryItem(
                       address:
-                          "aera, ${e.aera}, street, ${e.street}, society ${e.scoiety}, pincode ${e.pinCode}",
+                          "${e.street} street, pincode ${e.pinCode}, society ${e.scoiety}",
                       title: "${e.firstName} ${e.lastName}",
                       number: e.mobileNo,
                       addressType: e.addressType == "AddressTypes.Home"

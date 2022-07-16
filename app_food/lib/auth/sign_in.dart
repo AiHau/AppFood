@@ -1,4 +1,4 @@
-import 'package:app_food/config/spacing.dart';
+import 'package:app_food/config/components.dart';
 import 'package:app_food/providers/user_provider.dart';
 import 'package:app_food/screens/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -73,7 +73,7 @@ class _SignInState extends State<SignIn> {
                 children: [
                   SizedBox(height: 110, child: Image.asset('assets/cake.png')),
                   Text(
-                    'Food',
+                    Strings.appTitle,
                     style: GoogleFonts.dancingScript(
                       textStyle: TextStyle(
                           fontSize: 50,
