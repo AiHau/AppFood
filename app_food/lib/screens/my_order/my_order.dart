@@ -65,7 +65,7 @@ class _CartHistoryState extends State<CartHistory> {
                         });
                         return SingleDeliveryItem(
                           address:
-                              "${e.street} street, pincode: ${e.pinCode},${e.scoiety}",
+                              "${e.street} street, ${e.province}, ${e.scoiety}",
                           title: "${e.firstName} ${e.lastName}",
                           number: e.mobileNo,
                           addressType: e.addressType == "AddressTypes.Home"

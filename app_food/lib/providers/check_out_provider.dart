@@ -20,7 +20,7 @@ class CheckoutProvider with ChangeNotifier {
   TextEditingController landmark = TextEditingController();
   TextEditingController city = TextEditingController();
   TextEditingController aera = TextEditingController();
-  TextEditingController pincode = TextEditingController();
+  TextEditingController province = TextEditingController();
   LocationData? setLoaction;
 
   void validator(context, myType) async {
@@ -36,8 +36,8 @@ class CheckoutProvider with ChangeNotifier {
       Fluttertoast.showToast(msg: "street is empty");
     } else if (city.text.isEmpty) {
       Fluttertoast.showToast(msg: "city is empty");
-    } else if (pincode.text.isEmpty) {
-      Fluttertoast.showToast(msg: "pincode is empty");
+    } else if (province.text.isEmpty) {
+      Fluttertoast.showToast(msg: "province is empty");
     } else if (setLoaction == null) {
       Fluttertoast.showToast(msg: "setLoaction is empty");
     } else {
@@ -53,7 +53,7 @@ class CheckoutProvider with ChangeNotifier {
         "scoiety": scoiety.text,
         "street": street.text,
         "city": city.text,
-        "pincode": pincode.text,
+        "province": province.text,
         "addressType": myType.toString(),
         "longitude": setLoaction!.longitude,
         "latitude": setLoaction!.latitude,
@@ -84,7 +84,7 @@ class CheckoutProvider with ChangeNotifier {
         addressType: _db.get("addressType"),
         city: _db.get("city"),
         mobileNo: _db.get("mobileNo"),
-        pinCode: _db.get("pincode"),
+        province: _db.get("province"),
         scoiety: _db.get("scoiety"),
         street: _db.get("street"),
       );
@@ -101,32 +101,6 @@ class CheckoutProvider with ChangeNotifier {
   }
 
 ////// Order /////////
-  addPlaceOderData({
-    required List<ReviewCartModel> oderItemList,
-    var subTotal,
-    var address,
-    var shipping,
-  }) async {
-    FirebaseFirestore.instance
-        .collection("Order")
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .collection("MyOrders")
-        .doc()
-        .set(
-      {
-        "subTotal": "1234",
-        "Shipping Charge": "",
-        "Discount": "10",
-        "orderItems": oderItemList
-            .map((e) => {
-                  "orderTime": DateTime.now(),
-                  "orderImage": e.cartImage,
-                  "orderName": e.cartName,
-                  "orderPrice": e.cartPrice,
-                  "orderQuantity": e.cartQuantity
-                })
-            .toList(),
-      },
-    );
-  }
+
+  
 }

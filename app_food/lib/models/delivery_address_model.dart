@@ -5,7 +5,7 @@ class DeliveryAddressModel {
   String scoiety;
   String street;
   String city;
-  String pinCode;
+  String province;
   String addressType;
 
   DeliveryAddressModel({
@@ -14,7 +14,7 @@ class DeliveryAddressModel {
     required this.firstName,
     required this.lastName,
     required this.mobileNo,
-    required this.pinCode,
+    required this.province,
     required this.street,
     required this.scoiety,
   });

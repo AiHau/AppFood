@@ -88,6 +88,20 @@ class ReviewCartProvider with ChangeNotifier {
     return total;
   }
 
+  getTotalOrder() {
+    double discount = 30;
+    double discountValue = 0;
+    double shipping = 15;
+    double total = 0;
+    double totalPrice = getTotalPrice();
+    if (totalPrice > 100) {
+      discountValue = (totalPrice * discount) / 100;
+      total = totalPrice - discountValue;
+    }
+    total = totalPrice;
+    return total + shipping - discountValue;
+  }
+
 ////////////// ReviewCartDeleteFunction ////////////
   reviewCartDataDelete(cartId) {
     FirebaseFirestore.instance

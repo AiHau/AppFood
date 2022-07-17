@@ -90,8 +90,8 @@ class _AddDeliverAddressState extends State<AddDeliverAddress> {
               controller: checkoutProvider.city,
             ),
             CostomTextField(
-              labText: "Pincode",
-              controller: checkoutProvider.pincode,
+              labText: "province",
+              controller: checkoutProvider.province,
             ),
             InkWell(
               onTap: () {
