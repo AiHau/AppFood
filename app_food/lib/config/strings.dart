@@ -26,7 +26,7 @@ Internal record keeping.
 Security
 ''';
   static const textTermCondition =
-      ''' '1.     The User shall request to order food and beverages from a Restaurant Partner by clicking on ‘Place Order’ tab  irrevocable in place online orders for food .
+      '''1.    The User shall request to order food and beverages from a Restaurant Partner by clicking on ‘Place Order’ tab  irrevocable in place online orders for food .
 
 2.    The User must warrant that while placing an order the details like contact number, delivery address, etc. are accurate and correct. By providing these details, the User expresses his/her acceptance of terms and conditions and privacy policies. 
 

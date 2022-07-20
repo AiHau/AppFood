@@ -65,62 +65,67 @@ class _SignInState extends State<SignIn> {
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 100),
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            SizedBox(
-              height: 300,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(height: 110, child: Image.asset('assets/cake.png')),
-                  Text(
-                    Strings.appTitle,
-                    style: GoogleFonts.dancingScript(
-                      textStyle: TextStyle(
-                          fontSize: 50,
-                          color: Colors.white,
-                          shadows: [
-                            BoxShadow(
-                              blurRadius: 5,
-                              color: Colors.green.shade900,
-                              offset: const Offset(3, 3),
-                            )
-                          ]),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        'Sign up',
-                        style: GoogleFonts.roboto(
-                            textStyle: const TextStyle(fontSize: 18),
-                            color: Colors.pinkAccent),
+          child: SingleChildScrollView(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              SizedBox(
+                height: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                        height: 110, child: Image.asset('assets/cake.png')),
+                    Text(
+                      Strings.appTitle,
+                      style: GoogleFonts.dancingScript(
+                        textStyle: TextStyle(
+                            fontSize: 50,
+                            color: Colors.white,
+                            shadows: [
+                              BoxShadow(
+                                blurRadius: 5,
+                                color: Colors.green.shade900,
+                                offset: const Offset(3, 3),
+                              )
+                            ]),
                       ),
-                      yHeight1,
-                      SizedBox(
-                        height: 40,
-                        child: SignInButton(
-                          Buttons.Google,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          text: "Sign up with Google",
-                          onPressed: () {
-                            _googleSignUp().then(
-                              (value) => Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => const HomeScreen(),
-                                ),
-                              ),
-                            );
-                          },
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          'Sign up',
+                          style: GoogleFonts.roboto(
+                              textStyle: const TextStyle(fontSize: 18),
+                              color: Colors.pinkAccent),
                         ),
-                      )
-                    ],
-                  ),
-                ],
+                        yHeight1,
+                        SizedBox(
+                          height: 40,
+                          child: SignInButton(
+                            Buttons.Google,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            text: "Sign up with Google",
+                            onPressed: () {
+                              _googleSignUp().then(
+                                (value) =>
+                                    Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomeScreen(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ]),
+            ]),
+          ),
         ),
       ),
     );

@@ -8,6 +8,7 @@ import 'package:app_food/providers/product_provider.dart';
 import 'package:app_food/providers/review_cart_provider.dart';
 import 'package:app_food/providers/user_provider.dart';
 import 'package:app_food/screens/home/home_screen.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
@@ -17,7 +18,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(DevicePreview(builder: ((context) => const MyApp())));
 }
 
 class MyApp extends StatelessWidget {

@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison, no_leading_underscores_for_local_identifiers
 
 import 'package:app_food/models/delivery_address_model.dart';
-import 'package:app_food/models/review_cart_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
