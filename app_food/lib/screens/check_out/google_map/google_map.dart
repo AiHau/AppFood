@@ -40,8 +40,8 @@ class _GoogleMapState extends State<CostomGoogleMap> {
     return Scaffold(
       body: SafeArea(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
+          height: double.infinity,
+          width: double.infinity,
           child: Stack(
             children: [
               GoogleMap(
